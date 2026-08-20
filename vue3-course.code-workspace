@@ -1,0 +1,75 @@
+{
+	"folders": [
+		{
+			"name": "ch01-setup",
+			"path": "ch01-setup"
+		},
+		{
+			"name": "ch02-basic",
+			"path": "ch02-basic"
+		},
+		{
+			"name": "ch03-components",
+			"path": "ch03-components"
+		},
+		{
+			"name": "ch04-routings",
+			"path": "ch04-routings"
+		},
+		{
+			"name": "ch05-crud",
+			"path": "ch05-crud"
+		},
+		{
+			"name": "ch05-crud-api",
+			"path": "ch05-crud-api"
+		},
+		{
+			"name": "ch06-extra",
+			"path": "ch06-extra"
+		},
+		{
+			"name": "ch02-basic_q",
+			"path": "ch02-basic_q"
+		},
+		{
+			"name": "ch03-components_q",
+			"path": "ch03-components_q"
+		},
+		{
+			"name": "ch04-routings-q",
+			"path": "ch04-routings-q"
+		},
+		{
+			"path": "ex02-answer"
+		},
+		{
+			"path": "ex02-question"
+		},
+		{
+			"path": "ex03-answer"
+		},
+		{
+			"path": "ex03-question"
+		},
+		{
+			"path": "ex04-answer"
+		},
+		{
+			"path": "ex04-question"
+		},
+		{
+			"path": "ex05-answer"
+		},
+		{
+			"path": "ex05-question"
+		},
+		{
+			"path": "ex05-api-answer"
+		},
+		{
+			"path": "ex05-django-api"
+		}
+	],
+	"settings": {}
+}
