@@ -4,5 +4,5 @@ const pageTitle: string = '動作確認'; //追加
 
 <template>
     <h1>{{ pageTitle }}</h1>
-    <button class="btn btn-primary">BVN ボタン</button>
+    <button class="btn btn-primary">Bootstrapボタン</button>
 </template>

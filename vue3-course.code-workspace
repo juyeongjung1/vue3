@@ -25,10 +25,6 @@
 			"path": "ch05-crud-api"
 		},
 		{
-			"name": "ch06-extra",
-			"path": "ch06-extra"
-		},
-		{
 			"name": "ch02-basic_q",
 			"path": "ch02-basic_q"
 		},
@@ -68,7 +64,7 @@
 			"path": "ex05-api-answer"
 		},
 		{
-			"path": "ex05-django-api"
+			"path": "ex05-api-answer"
 		}
 	],
 	"settings": {}
