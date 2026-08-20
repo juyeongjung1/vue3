@@ -10,7 +10,7 @@ const employeeList = reactive([
   { id: 101, name: '佐藤一郎', salary: 3500000, department: '営業部' },
   { id: 102, name: '鈴木二郎', salary: 3500000, department: '総務部' },
   { id: 103, name: '高橋三郎', salary: 5000000, department: '開発部' },
-  { id: 104, name: '田中士郎', salary: 5500000, department: '営業部' },
+  { id: 104, name: '田中四郎', salary: 5500000, department: '営業部' },
   { id: 105, name: '伊藤五郎', salary: 4800000, department: '総務部' }
 ])
 
