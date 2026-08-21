@@ -23,8 +23,8 @@ const changeOfficeWork = () => {
   employee.textColor = 'text-primary'
 }
 /*changeRemoteWork 関数に以下のように追記してください。：
-　写真を '/images/photo2.png' に変更
-　文字色クラスを 'text-primary'（青色）に変更*/
+　写真を '/images/photo3.png' に変更
+　文字色クラスを 'text-danger'（赤色）に変更*/
 
 const changeRemoteWork = () => {
   employee.workLocation = '在宅勤務'

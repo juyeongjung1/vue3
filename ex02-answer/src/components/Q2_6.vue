@@ -38,7 +38,7 @@ const form = reactive({
   <!-- 雇用形態選択（ラジオボタン） -->
   <div>
     <label>雇用形態: </label>
-    <!--※ セレクトメニューは、同じ v-model を指定することでグループ化されます。 -->
+    <!--※ ラジオボタンは、同じ v-model を指定することでグループ化されます。 -->
     <label>
       <input type="radio" value="正社員" v-model="form.employmentType"> 正社員 
     </label>
