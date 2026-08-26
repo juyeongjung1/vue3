@@ -1,21 +1,23 @@
 <script setup lang="ts">
 
+import { ref } from 'vue'
+
 import HeaderMenu from './components/HeaderMenu.vue'
 //【3.1 ➀】　ここに、他の3つのコンポーネントをインポートするコードを追加してください
 
 //【ここからは、3.2で利用する枠】
-   //【3.2 ➀】　以下に、HeaderMenuに渡すデータを定義してください。変数名は、titleとuserNameです。
+   //【3.2 ➀】　以下に、HeaderMenuに渡すデータを定義してください。変数名は、pageTitleとuserNameです。
 
 
 
    //【3.2 ➁】　以下のMainContentで利用する商品一覧データを確認してください。
 
-const products = [
+const products = ref([
   { id: 1, name: 'ノートパソコン', price: 120000, category: '電子機器' },
   { id: 2, name: 'スマートフォン', price: 90000, category: '電子機器' },
   { id: 3, name: 'オフィスチェア', price: 25000, category: '家具' },
   { id: 4, name: 'ボールペンセット', price: 800, category: '文房具' }
-]
+])
 //【ここまでは、3.2で利用するデータ】
 
 

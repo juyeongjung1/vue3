@@ -45,7 +45,7 @@ const props = defineProps<{ products: Product[] }>()
             <tr v-for="p in props.products" :key="p.id">
               <td>{{ p.id }}</td>
               
-              <td>{{ p.name }}
+              <td>
                 <!--【3.3 ➂】 以下の商品名をリンク風にして、➁の関数にp.idを入れるように修正してください -->
                 <button class="btn btn-link"                  >
 

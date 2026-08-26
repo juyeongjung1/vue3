@@ -25,12 +25,14 @@ const employeeList = reactive([
 </script>
 
 <template>
-  <!--➃ 画面の右上に、選択された社員名を表示するエリア
-    （選択中の社員: ...）を追加してください -->
-  <div class="text-end me-5">
-          選択中の社員: <strong>         </strong>
-        </div>
-  <Header />
+  <div class="position-relative">
+    <Header />
+    <!--➃ 画面の右上に、選択された社員名を表示するエリア
+      （選択中の社員: ...）を追加してください -->
+    <div class="position-absolute top-0 end-0 p-3">
+      選択中の社員: <strong>         </strong>
+    </div>
+  </div>
   <div class="container">
     <div class="row">
       <div class="col-md-3">
