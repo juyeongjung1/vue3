@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// RouterLinkを使用するため、以下の行頭の「//」を外してください。
+// import { RouterLink } from 'vue-router'
 </script>
 
 <template>

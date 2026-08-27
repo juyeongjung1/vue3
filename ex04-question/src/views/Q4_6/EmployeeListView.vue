@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import type { Ref } from 'vue'
+// c. RouterLinkを使用するため、以下の行頭の「//」を外してください。
+// import { RouterLink } from 'vue-router'
 
 type Employee = {
   id: number

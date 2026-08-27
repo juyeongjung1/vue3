@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue'
 import type { Ref } from 'vue'
+import { RouterLink } from 'vue-router'
 // d.　➀ useRoute（vue-router）をインポートしてください。
 
 // 型定義

@@ -3,6 +3,7 @@
 import { inject } from 'vue'
 // d. ➁ vue から Ref をimport typeしてください。
 import type { Ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 // d ➂ 社員データの型定義（Employee型）を確認してください。
 type Employee = {
