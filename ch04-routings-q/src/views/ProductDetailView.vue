@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 
-// 【4.6 ➂】useRoute関数を呼び出してください】
+// 【4.6 ➂】useRoute関数を呼び出してください
 
 
 // 【4.6 ➃】useRouteで取得したrouteオブジェクトから、:id の部分を取得してください。

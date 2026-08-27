@@ -21,8 +21,8 @@ const routes = [
 
 // ルーターを作成
 const router = createRouter({
-  // ブラウザの履歴管理を有効に、基本URLをvite.config.tsのBASE_URLを基準に設定
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // ブラウザの履歴管理を有効に設定
+  history: createWebHistory(),
   routes                        // 上で定義したルート情報を登録
 })
 

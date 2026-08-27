@@ -10,7 +10,6 @@ type Employee = {
   name: string
   salary: number
   department: string
-  photoUrl: string
 }
 
 //d ➃ inject を使用して、親から提供された 'employeeList' を受け取り、
