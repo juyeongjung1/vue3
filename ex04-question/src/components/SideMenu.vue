@@ -10,6 +10,7 @@
         <!-- ➁to 属性には、以下のパスを指定します。
 	　　ダッシュボード: to="/Q4_4"
 　　　　社員一覧: to="/Q4_4/employees" -->
+        <!-- ➂ Bootstrapのクラス（list-group-item 等）はそのまま維持してください。 -->
 
         <a href="#" class="list-group-item list-group-item-action">
             ダッシュボード</a>

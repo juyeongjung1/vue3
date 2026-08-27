@@ -5,10 +5,6 @@ import FooterInfo from './components/FooterInfo.vue'
 import { ref } from 'vue'
 import { provide } from 'vue'
 
-// 親で管理するデータ
-const pageTitle = '商品管理システム'
-const userName = '管理者'
-
 // 商品一覧データ
 const products = ref([
   { id: 1, name: 'ノートパソコン', price: 120000, category: '電子機器' },
@@ -24,7 +20,7 @@ const products = ref([
 <template>
   <div class="container-fluid bg-light">
   
-    <HeaderMenu :title="pageTitle" :user="userName" />
+    <HeaderMenu />
 
     <div class="container my-4">
       <div class="row">

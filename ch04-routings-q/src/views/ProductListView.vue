@@ -10,14 +10,15 @@ type Product = {
     price: number;
     category: string
 }
-// 【4.5 ➃】以下に、App.vueでprovideされた「products」を受け取るコードを記述してください。
-
+// 【4.5 ➃】以下の仮配列を、App.vueでprovideされた「products」を受け取るコードに置き換えてください。
+// 4.3・4.4では、表の見出しだけを表示するために空の配列を使用します。
+const products: Product[] = []
 
 // 【3章の内容】親から受け取るpropsを定義
-const props = defineProps<{ products: Product[] }>()
+// const props = defineProps<{ products: Product[] }>()
 
 // 【3章の内容】親へ通知するイベントを定義
-const emit = defineEmits(['select'])
+// const emit = defineEmits(['select'])
 
 // 【3章の内容】ボタンが押されたときにemitで親にIDを通知
 //const selectRow = (id: number) => {
@@ -41,8 +42,8 @@ const emit = defineEmits(['select'])
                         </tr>
                     </thead>
                     <tbody>
-          <!-- 【4.5 ➄】以下をinjectで受け取った配列を参照するように修正してください。-->
-                        <tr v-for="p in props.products" :key="p.id">
+          <!-- 【4.5 ➄】以下がinjectで受け取ったproductsを参照していることを確認してください。-->
+                        <tr v-for="p in products" :key="p.id">
                             <td>{{ p.id }}</td>
                             <td>
           <!-- 【4.6 ➁】以下に、詳細画面へ遷移する動的URLを持つRouterLinkを入れてください。-->
