@@ -54,6 +54,11 @@ app.get(['/api/employees/:id', '/api/employees/:id/'], (req, res) => {
       res.status(500).json({ error: 'Database error' })
       return
     }
+    // ※補足：該当する社員がない場合は、404 Not Foundを返します。
+    if (!row) {
+      res.status(404).json({ error: '社員が見つかりません' })
+      return
+    }
     res.json(row)
   })
 })
@@ -98,6 +103,11 @@ app.put(['/api/employees/:id', '/api/employees/:id/'], (req, res) => {
       res.status(500).json({ error: 'Database error' })
       return
     }
+    // ※補足：更新対象が存在しない場合は、404 Not Foundを返します。
+    if (this.changes === 0) {
+      res.status(404).json({ error: '社員が見つかりません' })
+      return
+    }
     res.json({ id: id })
   })
 })
@@ -111,6 +121,11 @@ app.delete(['/api/employees/:id', '/api/employees/:id/'], (req, res) => {
   db.run(sql, [id], function (err) {
     if (err) {
       res.status(500).json({ error: 'Database error' })
+      return
+    }
+    // ※補足：削除対象が存在しない場合は、404 Not Foundを返します。
+    if (this.changes === 0) {
+      res.status(404).json({ error: '社員が見つかりません' })
       return
     }
     res.json({ message: '削除成功' })

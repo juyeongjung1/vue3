@@ -15,6 +15,7 @@ type Product = {
 const products = ref<Product[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
+const searchMessage = ref<string | null>(null)
 
 //【5.3.2 】検索キーワードを保持する変数
 const keyword = ref<string>('')
@@ -25,6 +26,7 @@ const searchProducts = async () => {
   error.value = null
 
   try {
+    searchMessage.value = null
     const res = await axios.get(
       'http://localhost:3000/api/products2', {
         params: {
@@ -32,10 +34,13 @@ const searchProducts = async () => {
       }
   })
     products.value = res.data
+    if (products.value.length === 0) {
+      searchMessage.value = '該当する商品がありません。'
+    }
     console.log('商品データを取得しました:', products.value)
 
   } catch (err) {
-    error.value = '該当する商品がありません。'
+    error.value = '商品情報の取得に失敗しました。'
     console.error(err)
 
   } finally {
@@ -52,6 +57,7 @@ const fetchProducts = async () => {
     // データ取得（ここがAPIとの通信部分）
     const res = await axios.get<Product[]>('http://localhost:3000/api/products')
     products.value = res.data
+    searchMessage.value = null
     console.log('商品データを取得しました:', products.value)
 
     // ローディング検証用コード（ローディング表示を維持したい場合）
@@ -95,6 +101,9 @@ onMounted(() => {
         <!-- エラー発生時 -->
         <div v-else-if="error" class="text-danger">
           {{ error }}
+        </div>
+        <div v-else-if="searchMessage" class="text-muted">
+          {{ searchMessage }}
         </div>
 
         <!-- 正常に取得できた場合の一覧表示 -->

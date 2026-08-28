@@ -81,6 +81,11 @@ app.get('/api/products/:id', (req, res) => {
       res.status(500).json({ error: 'Database error' });
       return;
     }
+    // ※補足：該当する商品がない場合は、404 Not Foundを返します。
+    if (!row) {
+      res.status(404).json({ error: '商品が見つかりません' });
+      return;
+    }
     // 4. 結果をJSONで返却（配列ではなく、単一のオブジェクトが返ります）
     res.json(row);
   });
@@ -149,6 +154,11 @@ app.put('/api/products/:id', (req, res) => {
       res.status(500).json({ error: 'Database error' });
       return;
     }
+    // ※補足：更新対象が存在しない場合は、404 Not Foundを返します。
+    if (this.changes === 0) {
+      res.status(404).json({ error: '商品が見つかりません' });
+      return;
+    }
     // 6. 成功レスポンス
     res.json({id: id }); // 更新した商品のIDを返す
   });
@@ -168,6 +178,11 @@ app.delete('/api/products/:id', (req, res) => {
     if (err) {
       console.error('削除エラー:', err);
       res.status(500).json({ error: 'Database error' });
+      return;
+    }
+    // ※補足：削除対象が存在しない場合は、404 Not Foundを返します。
+    if (this.changes === 0) {
+      res.status(404).json({ error: '商品が見つかりません' });
       return;
     }
     // 4. 成功レスポンス

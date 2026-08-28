@@ -58,7 +58,7 @@ const submitEmployee = async () => {
         <label>写真パス (例: /images/1001.png)</label>
         <!-- 5.4 b. 画像パス -->
         <!-- image_path 変数を v-model でバインドしてください。 -->
-        <input type="text" class="form-control" v-model="image_path">
+        <input type="text" class="form-control">
         <div class="form-text">※public/imagesフォルダ内のファイル名を指定してください</div>
       </div>
       

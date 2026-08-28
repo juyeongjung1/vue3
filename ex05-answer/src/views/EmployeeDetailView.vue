@@ -18,14 +18,16 @@ type Employee = {
 }
 
 const employee = ref<Employee | null>(null)
+const error = ref<string | null>(null)
 
 // 詳細取得
 const fetchDetail = async () => {
   try {
+    error.value = null
     const res = await axios.get(`http://localhost:3000/api/employees/${id}/`)
     employee.value = res.data
   } catch (err) {
-    alert('データ取得に失敗しました')
+    error.value = '社員情報の取得に失敗しました。'
   }
 }
 
@@ -73,5 +75,9 @@ onMounted(() => {
         <button class="btn btn-danger" @click="deleteEmployee">削除</button>
       </div>
     </div>
+  </div>
+  <div v-else-if="error" class="container mt-4">
+    <p class="text-danger">{{ error }}</p>
+    <RouterLink to="/employees" class="btn btn-secondary">一覧へ戻る</RouterLink>
   </div>
 </template>

@@ -5,7 +5,7 @@ import NewEmployeeView from '../views/NewEmployeeView.vue'
 import EmployeeEditView from '../views/EmployeeEditView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/employees',

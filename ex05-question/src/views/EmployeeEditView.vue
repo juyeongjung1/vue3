@@ -46,20 +46,23 @@ onMounted(() => {
       <div class="mb-3">
         <label>氏名</label>
         <!-- 5.3 d. バインディング -->
-        <!-- 各 input タグに適切な v-model を設定してください。 -->
-        <input type="text" class="form-control" v-model="name">
+        <!-- 氏名の入力欄にnameをバインドしてください。 -->
+        <input type="text" class="form-control">
       </div>
       <div class="mb-3">
         <label>パスワード</label>
-        <input type="text" class="form-control" v-model="password">
+        <!-- パスワードの入力欄にpasswordをバインドしてください。 -->
+        <input type="text" class="form-control">
       </div>
       <div class="mb-3">
         <label>給与</label>
-        <input type="number" class="form-control" v-model="salary">
+        <!-- 給与の入力欄にsalaryをバインドしてください。 -->
+        <input type="number" class="form-control">
       </div>
       <div class="mb-3">
         <label>勤務地</label>
-        <input type="text" class="form-control" v-model="location_name">
+        <!-- 勤務地の入力欄にlocation_nameをバインドしてください。 -->
+        <input type="text" class="form-control">
       </div>
       
       <!--5.3 c　buttonのtypeをsubmitにしてください。-->

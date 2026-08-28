@@ -24,7 +24,7 @@
 
 ### 作業の前提:
 *   Vue-router、axiosモジュールは、npmから導入済みです。
-*   3章で作成した `Header.vue`, `SideMenu.vue`, `Footer.vue` が `src/components` 内に存在している状態から開始します。
+*   3章で作成した `HeaderMenu.vue`, `SideMenu.vue`, `FooterInfo.vue` が `src/components` 内に存在している状態から開始します。
 *   REST APIのソースコードは、`ex05-api-answer`の「`server.js`」を参照してください。
 
 ### 作成・修正するファイル:
@@ -65,7 +65,7 @@
 ### 【動作確認 5.1】
 1.  API サーバーを起動します (`ex05-api-answer` で `node server.js`)。
 2.  開発サーバーを起動します (`ex05-question` で `npm run dev`)。
-3.  トップページにアクセスし、社員一覧が表示されるか確認します。
+3.  ブラウザで`http://localhost:5173/employees`を開き、社員一覧が表示されるか確認します。
 4.  検索ボックスに「山田」などのキーワードを入力し、「検索」ボタンをクリックして検索が動作するか確認します。
 
 

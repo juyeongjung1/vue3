@@ -17,5 +17,3 @@ INSERT INTO products (name, price, category) VALUES
 ('スマートフォン', 90000, '電子機器'),
 ('オフィスチェア', 25000, '家具'),
 ('ボールペンセット', 800, '文房具');
-
-DELETE FROM products WHERE id = 5; -- IDが5のデータを削除

@@ -17,12 +17,26 @@ const loading = ref(true)
 const error = ref<string | null>(null)
 const keyword = ref('')
 
-// 検索・一覧取得関数
+// 一覧取得関数
 const fetchEmployees = async () => {
   loading.value = true
   error.value = null
   try {
-    const res = await axios.get('http://localhost:3000/api/employees/', {
+    const res = await axios.get('http://localhost:3000/api/employees/')
+    employees.value = res.data
+  } catch (err) {
+    error.value = '社員情報の取得に失敗しました。'
+  } finally {
+    loading.value = false
+  }
+}
+
+// 検索関数
+const searchEmployees = async () => {
+  loading.value = true
+  error.value = null
+  try {
+    const res = await axios.get('http://localhost:3000/api/employees/search/', {
       params: { keyword: keyword.value }
     })
     employees.value = res.data
@@ -46,7 +60,7 @@ onMounted(() => {
     <div class="d-flex justify-content-between mb-3">
       <div class="input-group w-50">
         <input type="text" class="form-control" v-model="keyword" placeholder="氏名で検索">
-        <button class="btn btn-primary" @click="fetchEmployees">検索</button>
+        <button class="btn btn-primary" @click="searchEmployees">検索</button>
       </div>
       <RouterLink to="/employees/new" class="btn btn-success">新規登録</RouterLink>
     </div>
