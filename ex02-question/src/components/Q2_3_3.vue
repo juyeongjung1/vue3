@@ -12,7 +12,7 @@ const employee = reactive({
 })
 
 /*b. 手取り額の算出
-➁ 給与の 80% を手取り額として計算する算出プロパティ salaryTaxPlus を定義してください。
+➁ 給与の 80% を手取り額として計算する算出プロパティ salaryTaxPlus を、戻り値の型を number と明示して定義してください。
 o	計算式: employee.salary * 0.8*/
 
 
