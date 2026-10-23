@@ -65,6 +65,9 @@ def main():
 #define FILE_VERSION_STRING "9.0.0.1"
 #define PRODUCT_VERSION_STRING FILE_VERSION_STRING
 #define COMPANY_NAME "Unofficial community build"
+#undef FILE_DESCRIPTION
+#undef INTERNAL_NAME
+#undef ORIGINAL_FILENAME
 #define FILE_DESCRIPTION "ZoomIt Muted Green (unofficial)"
 #define INTERNAL_NAME "ZoomIt-MutedGreen"
 #define ORIGINAL_FILENAME "ZoomIt-MutedGreen.exe"
@@ -105,7 +108,7 @@ def main():
     run(*compile_args, *files, cwd=work)
     run("rc.exe", "/nologo", "/d_M_X64", f"/i{source}", f"/fo{work / 'ZoomIt.res'}", source / "ZoomIt.rc", cwd=source)
     exe = package / "ZoomIt-MutedGreen.exe"
-    libraries = ["user32", "gdi32", "advapi32", "shell32", "ole32", "oleaut32", "uuid", "shlwapi", "comctl32", "version", "winmm", "gdiplus", "msimg32", "uxtheme", "windowsapp", "runtimeobject", "dwmapi"]
+    libraries = ["user32", "gdi32", "advapi32", "shell32", "ole32", "oleaut32", "uuid", "shlwapi", "comctl32", "comdlg32", "version", "winmm", "gdiplus", "msimg32", "uxtheme", "windowsapp", "runtimeobject", "dwmapi"]
     objects = sorted(p for p in work.glob("*.obj") if p.stem != "verify_color")
     run("link.exe", "/nologo", "/SUBSYSTEM:WINDOWS", "/MACHINE:X64", "/MANIFEST:NO", "/DYNAMICBASE", "/NXCOMPAT", f"/OUT:{exe}", *objects, work / "ZoomIt.res", *[f"{n}.lib" for n in libraries], cwd=work)
 
