@@ -2,13 +2,11 @@
 
 ## 他のPCへ渡す配布版
 
-`portable/build.py` と `.github/workflows/zoomit-portable.yml` で、MITライセンスの公開ソースからWindows x64用のZIPを作成します。PowerToys v0.90.1に含まれるZoomIt 9.0（コミット `229a2894fa27c3a879132bd013f05951d4523660`）を使用し、緑を同じ `#6B9E78` に変更します。
+`portable/build.py` と `.github/workflows/zoomit-portable.yml` で、MITライセンスの公開ソースからWindows x64用のZIPを作成します。PowerToys v0.90.1に含まれるZoomIt 9.0（コミット `229a2894fa27c3a879132bd013f05951d4523660`）を使用し、緑を `#65C155`（RGB: 101, 193, 85）に変更します。
 
 配布ZIPには実行ファイル、日本語の使い方、ライセンス文書、変更済みソースを同梱します。Sysinternals版7.20の実行ファイルは含めません。非公式ビルドであり、Microsoftの電子署名はありません。
 
-配布版9.0.0.2から、設定を `HKEY_CURRENT_USER\Software\ZoomItMutedGreen` に保存します。旧ZoomItと初回配布版の設定は読み込まず、初回は標準設定で起動します。自動起動の登録名も `ZoomItMutedGreen` として独立させています。元のZoomItを終了してから起動してください。
-
-ビルド時には実際の設定クラスを一時レジストリ内で実行し、旧設定を読み込まないこと、旧設定を変更しないこと、専用設定を保存・再読込できることを検証します。
+配布版9.0.0.3は、初回配布版と同じ `HKEY_CURRENT_USER\Software\Sysinternals\ZoomIt` の設定を引き継ぎます。元のZoomItを終了してから起動してください。以前の色が復元された場合は、描画モードで文字入力を始める前にGを押すと、新しい緑に切り替わって保存されます。
 
 ビルドはGitHub Actionsの「ZoomItの配布用ZIPを作成」から実行できます。ローカルで再ビルドする場合は、Visual Studio 2022のx64 Native Tools環境、Windows SDK、Pythonを用意し、上記コミットのPowerToysを取得してから次を実行します。
 
