@@ -6,6 +6,10 @@
 
 配布ZIPには実行ファイル、日本語の使い方、ライセンス文書、変更済みソースを同梱します。Sysinternals版7.20の実行ファイルは含めません。非公式ビルドであり、Microsoftの電子署名はありません。
 
+配布版9.0.0.2から、設定を `HKEY_CURRENT_USER\Software\ZoomItMutedGreen` に保存します。旧ZoomItと初回配布版の設定は読み込まず、初回は標準設定で起動します。自動起動の登録名も `ZoomItMutedGreen` として独立させています。元のZoomItを終了してから起動してください。
+
+ビルド時には実際の設定クラスを一時レジストリ内で実行し、旧設定を読み込まないこと、旧設定を変更しないこと、専用設定を保存・再読込できることを検証します。
+
 ビルドはGitHub Actionsの「ZoomItの配布用ZIPを作成」から実行できます。ローカルで再ビルドする場合は、Visual Studio 2022のx64 Native Tools環境、Windows SDK、Pythonを用意し、上記コミットのPowerToysを取得してから次を実行します。
 
 ```powershell

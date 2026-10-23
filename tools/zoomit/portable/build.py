@@ -51,6 +51,14 @@ def main():
     shutil.copy2(upstream / "LICENSE", package / "LICENSE.txt")
 
     replace_once(source / "ZoomIt.h", "RGB(0, 255, 0)", "RGB(107, 158, 120)")
+    # 設定と自動起動の登録名を専用化し、従来のZoomItから読み込まない。
+    replace_once(source / "ZoomIt.h", '#define APPNAME\t\tL"ZoomIt"', '#define APPNAME\t\tL"ZoomItMutedGreen"\n#define SETTINGS_KEY L"Software\\\\ZoomItMutedGreen"')
+    replace_once(source / "Zoomit.cpp", '_T("Software\\\\Sysinternals\\\\") APPNAME', 'SETTINGS_KEY')
+    replace_once(source / "Zoomit.cpp", '_T( "Software\\\\Sysinternals\\\\Zoomit" )', 'SETTINGS_KEY')
+    replace_once(source / "Zoomit.cpp", '_T("Software\\\\Sysinternals\\\\Zoomit")', 'SETTINGS_KEY')
+    replace_once(source / "Zoomit.cpp", 'RegQueryValueEx( hRunKey, _T("Zoomit"),', 'RegQueryValueEx( hRunKey, APPNAME,')
+    if "software\\\\sysinternals\\\\" in (source / "Zoomit.cpp").read_text(encoding="utf-8-sig").lower():
+        raise RuntimeError("旧ZoomItの設定保存先への参照が残っています。")
     # MITの公開ソース版には、Sysinternals配布バイナリの利用契約を適用しない。
     replace_once(source / "Zoomit.cpp", "    if( !ShowEula( APPNAME, NULL, NULL )) return 1;", "    // MIT license and copyright notices are included with this build.")
     replace_once(source / "pch.h", '#include "Eula/eula.h"\n', "")
@@ -60,9 +68,9 @@ def main():
 
     # 単体版のバージョン情報。公式の配布元と誤認されないよう非公式版を明記する。
     (source / "version.h").write_text('''#pragma once
-#define FILE_VERSION 9,0,0,1
+#define FILE_VERSION 9,0,0,2
 #define PRODUCT_VERSION FILE_VERSION
-#define FILE_VERSION_STRING "9.0.0.1"
+#define FILE_VERSION_STRING "9.0.0.2"
 #define PRODUCT_VERSION_STRING FILE_VERSION_STRING
 #define COMPANY_NAME "Unofficial community build"
 #undef FILE_DESCRIPTION
@@ -112,6 +120,12 @@ def main():
     objects = sorted(p for p in work.glob("*.obj") if p.stem != "verify_color")
     run("link.exe", "/nologo", "/SUBSYSTEM:WINDOWS", "/MACHINE:X64", "/MANIFEST:NO", "/DYNAMICBASE", "/NXCOMPAT", f"/OUT:{exe}", *objects, work / "ZoomIt.res", *[f"{n}.lib" for n in libraries], cwd=work)
 
+    script_dir = Path(__file__).resolve().parent
+    run(*compile_args, script_dir / "verify_settings.cpp", cwd=work)
+    settings_test = work / "verify_settings.exe"
+    run("link.exe", "/nologo", "/SUBSYSTEM:CONSOLE", f"/OUT:{settings_test}", work / "verify_settings.obj", *[f"{n}.lib" for n in libraries], cwd=work)
+    run(settings_test)
+
     # このビルドのプロセスだけを起動して、初期化直後の異常終了がないことを確認。
     process = subprocess.Popen([str(exe)])
     try:
@@ -124,11 +138,11 @@ def main():
             process.terminate()
             process.wait(timeout=10)
 
-    script_dir = Path(__file__).resolve().parent
     shutil.copy2(script_dir / "使い方.txt", package / "使い方.txt")
     (package / "SOURCE.txt").write_text(
         f"公開ソース: https://github.com/microsoft/PowerToys/tree/{UPSTREAM_COMMIT}\n"
         "PowerToys v0.90.1内のZoomIt 9.0を単体ビルド。緑を#6B9E78へ変更。\n"
+        "バージョン9.0.0.2: 設定はHKCU\\Software\\ZoomItMutedGreenに保存。旧ZoomItの設定は引き継がない。\n"
         "MITライセンス文書を同梱し、Sysinternalsバイナリ用のEULA表示を除外。\n"
         "非公式版を示すタイトル・バージョン情報を設定。Microsoftの署名なし。\n"
         "ソースとビルド方法: https://github.com/juyeongjung1/vue3/tree/main/tools/zoomit/portable\n"
@@ -140,6 +154,8 @@ def main():
                     zipped.write(path, path.relative_to(work))
         zipped.write(upstream / "LICENSE", "LICENSE.txt")
         zipped.write(Path(__file__), "build.py")
+        zipped.write(script_dir / "verify_settings.cpp", "verify_settings.cpp")
+        zipped.write(script_dir / "使い方.txt", "使い方.txt")
     digest = hashlib.sha256(exe.read_bytes()).hexdigest()
     (package / "SHA256SUMS.txt").write_text(f"{digest}  {exe.name}\n", encoding="ascii")
     output = shutil.make_archive(str(work / package.name), "zip", work, package.name)
