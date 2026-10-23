@@ -1,0 +1,42 @@
+name: ZoomItの配布用ZIPを作成
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/zoomit-portable.yml'
+      - 'tools/zoomit/portable/**'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Windows 64ビット版の作成と確認
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - name: 変更用のコードを取得
+        uses: actions/checkout@v4
+      - name: MITライセンスのZoomItソースを取得
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/PowerToys
+          ref: 229a2894fa27c3a879132bd013f05951d4523660
+          path: upstream
+          sparse-checkout: |
+            src/modules/ZoomIt/ZoomIt
+            src/common/sysinternals
+      - name: 配布版をビルド
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          if errorlevel 1 exit /b 1
+          python -X utf8 tools\zoomit\portable\build.py upstream zoomit-build
+      - name: 配布ZIPを保存
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZoomIt-MutedGreen-Windows-x64
+          path: zoomit-build/ZoomIt-MutedGreen-Windows-x64.zip
+          if-no-files-found: error
+          retention-days: 30
