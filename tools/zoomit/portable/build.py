@@ -95,7 +95,8 @@ def main():
     wil = next((deps / "Microsoft.Windows.ImplementationLibrary").rglob("wil/resource.h")).parent.parent
     robmikh = next((deps / "robmikh.common").rglob("robmikh.common/DesktopWindow.h")).parent.parent
     includes = [source, common, generated, wil, robmikh]
-    compile_args = ["cl.exe", "/nologo", "/c", "/O2", "/MT", "/EHsc", "/std:c++20", "/utf-8", "/bigobj", "/DUNICODE", "/D_UNICODE", "/DNDEBUG", "/DWINVER=0x0A00", "/D_WIN32_WINNT=0x0A00", "/D_CRT_SECURE_NO_WARNINGS"]
+    # この版のstd::futureコルーチンはMSVCの/await拡張を使用する。
+    compile_args = ["cl.exe", "/nologo", "/c", "/O2", "/MT", "/EHsc", "/std:c++17", "/await", "/MP2", "/utf-8", "/bigobj", "/DUNICODE", "/D_UNICODE", "/DNDEBUG", "/DWINVER=0x0A00", "/D_WIN32_WINNT=0x0A00", "/D_CRT_SECURE_NO_WARNINGS"]
     compile_args += [f"/I{p}" for p in includes]
     files = [source / n for n in ("AudioSampleGenerator.cpp", "CaptureFrameWait.cpp", "SelectRectangle.cpp", "Utility.cpp", "DemoType.cpp", "VersionHelper.cpp", "VideoRecordingSession.cpp", "Zoomit.cpp")]
     files += [common / "WindowsVersions.cpp", common / "dll.c"]
@@ -105,7 +106,8 @@ def main():
     run("rc.exe", "/nologo", "/d_M_X64", f"/i{source}", f"/fo{work / 'ZoomIt.res'}", source / "ZoomIt.rc", cwd=source)
     exe = package / "ZoomIt-MutedGreen.exe"
     libraries = ["user32", "gdi32", "advapi32", "shell32", "ole32", "oleaut32", "uuid", "shlwapi", "comctl32", "version", "winmm", "gdiplus", "msimg32", "uxtheme", "windowsapp", "runtimeobject", "dwmapi"]
-    run("link.exe", "/nologo", "/SUBSYSTEM:WINDOWS", "/MACHINE:X64", "/MANIFEST:NO", "/DYNAMICBASE", "/NXCOMPAT", f"/OUT:{exe}", *sorted(work.glob("*.obj")), work / "ZoomIt.res", *[f"{n}.lib" for n in libraries], cwd=work)
+    objects = sorted(p for p in work.glob("*.obj") if p.stem != "verify_color")
+    run("link.exe", "/nologo", "/SUBSYSTEM:WINDOWS", "/MACHINE:X64", "/MANIFEST:NO", "/DYNAMICBASE", "/NXCOMPAT", f"/OUT:{exe}", *objects, work / "ZoomIt.res", *[f"{n}.lib" for n in libraries], cwd=work)
 
     # このビルドのプロセスだけを起動して、初期化直後の異常終了がないことを確認。
     process = subprocess.Popen([str(exe)])

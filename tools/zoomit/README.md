@@ -1,5 +1,21 @@
 # ZoomIt 7.20の緑を落ち着いた色に変更
 
+## 他のPCへ渡す配布版
+
+`portable/build.py` と `.github/workflows/zoomit-portable.yml` で、MITライセンスの公開ソースからWindows x64用のZIPを作成します。PowerToys v0.90.1に含まれるZoomIt 9.0（コミット `229a2894fa27c3a879132bd013f05951d4523660`）を使用し、緑を同じ `#6B9E78` に変更します。
+
+配布ZIPには実行ファイル、日本語の使い方、ライセンス文書、変更済みソースを同梱します。Sysinternals版7.20の実行ファイルは含めません。非公式ビルドであり、Microsoftの電子署名はありません。
+
+ビルドはGitHub Actionsの「ZoomItの配布用ZIPを作成」から実行できます。ローカルで再ビルドする場合は、Visual Studio 2022のx64 Native Tools環境、Windows SDK、Pythonを用意し、上記コミットのPowerToysを取得してから次を実行します。
+
+```powershell
+python -X utf8 tools/zoomit/portable/build.py "PowerToysの取得先" "新規ビルドフォルダー"
+```
+
+ソースと依存ライブラリを取得するため、ビルド時にはインターネット接続が必要です。受け取った人のPCにはPythonや開発ツールは不要です。
+
+## 手元の7.20を変更するスクリプト
+
 `set_muted_green.py` は、確認済みの64ビット版ZoomIt 7.20について、緑の色指定を `#00FF00` から `#6B9E78`（RGB: 107, 158, 120）へ変更したコピーを作ります。
 
 対象ファイルをSHA256で照合するため、別バージョンには適用できません。Pythonの標準ライブラリのみを使用します。
