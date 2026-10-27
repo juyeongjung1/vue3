@@ -2,9 +2,9 @@
 
 ## 配布用の軽量版
 
-配布用ZIPには、指定したコミットの教材・問題・解答・画像・PDF資料を収録します。`package.json` と `package-lock.json`、APIのデータベースも残します。容量の大きい `Text` 内の編集用Word文書（`.docx`）は除外します。
+配布用ZIPには、指定したコミットのVue教材・問題・解答・画像と、実行に必要なAPIを収録します。`package.json` と `package-lock.json`、APIのデータベースも残します。ルートにはこの手順書、`.gitignore`、VS Code用ワークスペース設定を同梱します。
 
-ローカルの作業中の修正、未コミットの追加ファイル、`node_modules`、Gitの履歴（`.git`）は含めません。教材のソースを編集して実行するための配布物です。
+Word・PDFを含む `Text` フォルダー、補助ツールの `tools`、GitHub用設定は含めません。ローカルの作業中の修正、未コミットの追加ファイル、`node_modules`、Gitの履歴（`.git`）も含めません。教材のソースを編集して実行するための配布物です。
 
 ### 受け取った方の使い方
 
@@ -31,7 +31,7 @@ git fetch origin
 python tools/create_distribution.py
 ```
 
-GitHubから取得した `origin/main` の確定済みコミットを使い、`distribution/vue3-course-コミットID.zip` を作成します。**手元の未コミットの修正は入りません。** 除外するWord文書のGit LFSデータはダウンロードしません。配布対象に別のGit LFSポインターが見つかった場合は、実体のないファイルを配らないよう作成を中止します。
+GitHubから取得した `origin/main` の確定済みコミットを使い、`distribution/vue3-course-コミットID.zip` を作成します。**手元の未コミットの修正は入りません。** 直下に `package.json` がある各教材フォルダーを収録します。除外する資料のGit LFSデータはダウンロードしません。配布対象にGit LFSポインターが見つかった場合は、実体のないファイルを配らないよう作成を中止します。
 
 過去の完成版を指定する場合は、コミットIDまたはタグを渡します。
 

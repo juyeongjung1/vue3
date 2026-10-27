@@ -1,4 +1,4 @@
-"""コミット済みの教材から、編集用Word文書を除いた配布用ZIPを作成する。"""
+"""コミット済みのVue教材とAPIから配布用ZIPを作成する。"""
 
 import argparse
 import io
@@ -30,10 +30,16 @@ def main():
         "-c", "filter.lfs.required=false", "archive", "--format=zip", revision
     )
     with zipfile.ZipFile(io.BytesIO(raw_archive)) as source:
+        projects = {
+            Path(name).parts[0]
+            for name in source.namelist()
+            if len(Path(name).parts) == 2 and name.endswith("/package.json")
+        }
+        root_files = {"README.md", ".gitignore", "vue3-course.code-workspace"}
         files = []
         for entry in source.infolist():
             path = Path(entry.filename)
-            if entry.is_dir() or (path.parts[0] == "Text" and path.suffix.lower() == ".docx"):
+            if entry.is_dir() or (path.parts[0] not in projects and entry.filename not in root_files):
                 continue
             data = source.read(entry)
             if data.startswith(LFS_HEADER):
