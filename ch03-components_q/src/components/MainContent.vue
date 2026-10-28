@@ -13,10 +13,11 @@ type Product = {
     category: string 
 }
 
-// 3.1ではpropsなしで配置できるようにし、3.2で親から配列を受け取る
-const props = withDefaults(defineProps<{ products?: Product[] }>(), {
-    products: () => []
-})
+// 3.1の表示確認用。3.2ではこの行をコメントにしてください。
+const props: { products: Product[] } = { products: [] }
+
+// 3.2では次の行のコメントを外し、親から受け取る配列のpropsを定義してください。
+// const props = defineProps<{ products: Product[] }>()
 
 //////////////【ここから、3.3の問題】///////////////
 // ➀ 以下に、 親へ通知するイベントを定義してください。
@@ -63,7 +64,7 @@ const props = withDefaults(defineProps<{ products?: Product[] }>(), {
       <div class="row">
         <!-- 【3.4 ➅ 】productCardをimportしてください。-->
         <!-- 【3.4 ➆ 】以下のfor文を確認してください。-->
-        <div class="col-md-4 mb-4" v-for="product in products" :key="product.id">
+        <div class="col-md-4 mb-4" v-for="product in props.products" :key="product.id">
           <!-- 【3.4 ➇】以下にProductCardを配置し、productをv:bindで指定してください-->
 
         </div>
