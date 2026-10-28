@@ -13,8 +13,10 @@ type Product = {
     category: string 
 }
 
-// 親から受け取る配列のpropsを定義
-const props = defineProps<{ products: Product[] }>()
+// 3.1ではpropsなしで配置できるようにし、3.2で親から配列を受け取る
+const props = withDefaults(defineProps<{ products?: Product[] }>(), {
+    products: () => []
+})
 
 //////////////【ここから、3.3の問題】///////////////
 // ➀ 以下に、 親へ通知するイベントを定義してください。
